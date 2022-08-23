@@ -27,8 +27,11 @@ public class UserService {
 
 
     public User createNewAccount(AuthenticationRequest request) throws LoginException {
-
-
+    	
+    	if(request.getUserName()==null || request.getPassword()==null || request.getUserName().isEmpty() || request.getPassword().isEmpty()) {
+    		throw new LoginException("Username or Password is Empty");
+    	}
+    	
         String textPassword = request.getPassword();
         String encryptedPassword = passwordEncoder.encode(textPassword);
         String userName = request.getUserName();
